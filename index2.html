@@ -1,0 +1,50 @@
+<html>
+
+<body>
+    <h1>Fetch content from backend using AJAX</h1>
+    <p id="f0"></p>
+    <p id="content"></p>
+    <table id="f1" border="1px">
+        <tr>
+            <td>id</td>
+            <td>name</td>
+        </tr>
+    </table>
+    <script type="text/javascript">
+    
+        let n = prompt("enter id");
+        var xmlhttp = new XMLHttpRequest();
+        xmlhttp.onreadystatechange = function () { 
+            if (this.readyState == 4 && this.status == 200) {
+                var myObj = JSON.parse(this.responseText);
+
+
+
+                  
+                for (var i = 0; i < myObj.content.length; i++) {
+                    var table = document.getElementById('f1');
+                    var tr = document.createElement('tr');
+                    tr.innerHTML = "<tr> <td>" + myObj.content[i].id + "</td> <td>" + myObj.content[i].name + "</td> </tr>";
+                    table.append(tr);
+
+
+
+
+
+                }
+            }
+        };
+
+        let url = "http://localhost/api/api.php?id=" + n;
+
+        xmlhttp.open("GET", url, true);
+
+        xmlhttp.send();
+
+
+
+
+    </script>
+</body>
+
+</html>
